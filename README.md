@@ -1,4 +1,4 @@
-# runtime-tester
-This projects provides simple means to test the running time of an algorithm.
+# Recursive Algorithms
+This projects provides java implementations of popular recursive algorithms.
 
-You can easily test any of your code by simply putting it into a Runnable.
+
