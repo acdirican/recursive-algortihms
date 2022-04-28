@@ -9,6 +9,7 @@ This projects provides java implementations of popular recursive algorithms. Add
 <ul>
   <li>Factorial Function</li>
   <li>GCD (Euclid)</li>
+  <li>finding the sum of consecutive numbers</li>
   <li>Finding the sum of the elements of an array</li>
   <li>Searcing an array (indexOf)</li>
 </ul>
