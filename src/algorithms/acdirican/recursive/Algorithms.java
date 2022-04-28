@@ -1,10 +1,10 @@
 package algorithms.acdirican.recursive;
 
 /**
+ * This class includes the implemenations of recerive algorithms
  * 
- * @author AhmetCengizhan Dirican
- * @version 1.0
- *
+ * @author Ahmet Cengizhan Dirican
+ * @see https://github.com/acdirican
  */
 public class Algorithms {
 	/**
