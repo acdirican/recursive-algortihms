@@ -1,5 +1,10 @@
 package algorithms.acdirican.recursive;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * This class includes the implemenations of recerive algorithms
  * 
@@ -96,5 +101,140 @@ public class Algorithms {
 		}
 		return gcd(n, m % n);
 	}
+	
+	/**
+	 * Print all permutations of a char array
+	 * 
+	 * @param arr
+	 * @return
+	 */
+	public static int printPermutations(char[] arr) {
+		return printPermutations(arr, 0);
+	}
+
+	private static int printPermutations(char[] arr, int c) {
+		if (c == arr.length) {
+			System.out.println(arr);
+			return 1;
+		}
+		int n = 0;
+		for(int i =c; i<arr.length; i++) {
+			swap(arr, c, i);
+			n += printPermutations(arr, c + 1);
+			swap(arr, i, c);
+		}
+		return n;
+	}
+
+	private static void swap(char[] arr, int c, int i) {
+		char t = arr[c];
+		arr[c] = arr[i];
+		arr[i] = t;
+		
+	}
+	
+	/**
+	 * Print all possible paths in a graph
+	 * @param graph
+	 * @return
+	 */
+	public static int printAllPaths(int[][] graph) {
+		return printAllPaths(graph, 0, new LinkedHashSet<Integer>());
+	}
+
+	private static int printAllPaths(int[][] graph, int node, Set<Integer> visited) {
+		if (visited.contains(node)) {
+			return 0;
+		}
+		
+		visited.add(node);
+		
+		boolean allVisited = true;
+		for(int i=0; i<graph.length; i++) {
+			if (!visited.contains(i)) {
+				allVisited = false;
+			}
+		}
+		if (allVisited) {
+			System.out.println(visited);
+			return 1;
+		}
+
+		
+		int n = 0;
+		for (int i=0; i<graph[node].length; i++) {
+			int weight =  graph[node][i];
+			if (weight != 0 && !visited.contains(i)) {
+				n += printAllPaths(graph, i, new LinkedHashSet<Integer>(visited));
+				System.out.println();
+			}
+			
+		}
+		return n;
+	}
+	
+	/**
+	 * Print all possible knapsack fits
+	 * @param graph
+	 * @return
+	 */
+	public static int printAllFits(int items[], int[] weights, int[] values, int W) {
+		int n=0;
+		//Let's try all combinations
+		for (int r = 1; r <=values.length; r++) {
+			// A temporary array to store all combination one by one
+	        int data[]=new int[r];
+			n += printAllFits(items, weights, values, W, data, 0, items.length-1, 0, r);
+		}
+		return n;
+	}
+
+	private static int printAllFits(int[] arr, int[] weights, int[] values, int W, int[] data, int start, int end, int current, int r) {
+		// Current combination is ready to be printed, print it
+        if (current == r) {
+        	if (sumWeight(data, weights, r) == W) {
+        		print(data, r);
+        	}
+            
+            return 1;
+        }
+        
+        // replace index with all possible elements. The condition
+        // "end-i+1 >= r-index" makes sure that including one element
+        // at index will make a combination with remaining elements
+        // at remaining positions
+        int n=0;
+        for (int i=start; i<=end && end-i+1 >= r-current; i++)
+        {
+            data[current] = arr[i];
+            n += printAllFits(arr, weights, values, W, data, i+1, end, current+1, r);
+        }
+        
+		return n;
+	}
+	
+	private static void print(int[] arr, int r) {
+		 for (int j=0; j<r; j++) {
+             System.out.print(arr[j]+" ");
+         }
+         System.out.println("");
+	}
+
+	private static void swap(int[] arr, int c, int i) {
+		int t = arr[c];
+		arr[c] = arr[i];
+		arr[i] = t;
+		
+	}
+
+	private static int sumWeight(int[] arr, int[] weights, int r) {
+		int s = 0;
+		for (int i = 0; i < r; i++) {
+			s += weights[arr[i]];
+
+		}
+		return s;
+	}
+
 	
 }
